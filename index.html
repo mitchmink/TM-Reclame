@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="apple-touch-icon-precomposed" href="images/icon.png">
+		<link rel="apple-touch-startup-image" href="images/phone_startup.png">
+		<title>TM Reclame</title>
+		<link rel="stylesheet" href="css/tm.css" />
+		<link rel="stylesheet" href="css/jquerymobilestructure101.css" />
+		<link rel="stylesheet" href="css/jquerymobile10a4.css" />
+		<link rel="stylesheet" href="css/carousel.css" />
+		<script src="js/jquery164min.js"></script> 
+		<script type="text/javascript" src="js/jquerymobile10a4min.js"></script>
+
+        <script src="js/carousel.js"></script>
+                <script>
+            $(document).ready(function() {
+                $('#carousel').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel1').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel2').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel3').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel4').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel5').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel6').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel7').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel8').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel9').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel10').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel11').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel12').carousel({endless: true});
+            });
+            $(document).ready(function() {
+                $('#carousel13').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel14').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel15').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel16').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel17').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel18').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel19').carousel({endless: true});
+            });
+             $(document).ready(function() {
+                $('#carousel20').carousel({endless: true});
+            });
+        </script>
+        <script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAuvAXPRXL9qkzO0R8vzYpOhQ_BAnb8hQeSCQ2aBH79hHa1YbW_RQNN9ClKXG21xQObiXJ7diAAYaywg"></script>
+		<script type="text/javascript">
+		<!--
+			//INIT
+			$(document).bind("mobileinit", function(){
+			  	$.extend(  $.mobile , {
+					defaultTransition: "slide"
+			  	}); 
+			  
+			  	//init local storage feeds
+			  	if ( typeof localStorage["feeds"] == "undefined")
+			  	{
+			    	restoreDefault();
+			  	}
+			});
+			
+			$(document).ready(function(){
+				//load local storage feeds
+				var feeds = eval(localStorage["feeds"]);
+			  	if (feeds!=null)
+				for (var i=0; i<feeds.length;i++)
+			  	{
+			  		//create buttons for rss feed
+			  		$("#yourfeeds").append('<input data-icon="arrow-r" data-iconpos="right" type="button" feed="'+localStorage.feeds[i]+'" onclick="loadFeed(\''+feeds[i]+'\');" value="'+feeds[i]+'" />');
+			  		$("#deletefeedlist").append('<input data-icon="delete" data-iconpos="right" type="button" feed="'+localStorage.feeds[i]+'" onclick="deleteFeed(\''+feeds[i]+'\');" value="'+feeds[i]+'" />');
+			  	}
+			});
+			
+			//FUNCS
+			function restoreDefault()
+			{
+				localStorage.clear();
+				var feeds= new Array();
+				feeds.push("http://tmreclame.nl/blog/rss");
+				
+				localStorage.setItem("feeds", JSON.stringify(feeds));
+				window.location.reload();
+			}
+			
+			function loadFeed(url)
+			{
+				var rnd=Math.floor(Math.random()*10000000);
+				$(document.body).append('<div data-role="page" id="results'+rnd+'" data-theme="b">'+$("#results").html()+'</div>');
+				
+				var feed = new google.feeds.Feed(url);
+				feed.setNumEntries(30);
+				feed.load(function(result) {
+					if (!result.error) 
+					{
+						$("#results"+rnd+" .resultscontent").append('<div data-role="controlgroup" class="articlelist"></div>');
+					  	for (var i = 0; i < result.feed.entries.length; i++) {
+							$("#results"+rnd+" .resultscontent .articlelist").append('<input data-icon="arrow-r" data-iconpos="right" onclick=\'showArticle("'+escape(result.feed.entries[i].title)+'","'+escape(result.feed.entries[i].link)+'","'+escape(result.feed.entries[i].content)+'")\' type="button" value="' + result.feed.entries[i].title.replace(/"/g, "'") + '" />');
+						}
+						$("#results"+rnd+" .feedtitle").html(url);
+						$.mobile.changePage($("#results"+rnd),"slide",false,true);
+					}
+					else
+						alert('feed error');
+				});
+			}
+			
+			function showArticle(title, url, desc)
+			{
+				if (typeof desc=="undefined")
+					desc="(No description provided)";
+				$("#article .articleinfo").html("<p>"+unescape(title)+"</p><p>"+unescape(desc)+"</p><p><a target=\"_blank\" href=\""+unescape(url)+"\">"+unescape(url)+"</a></p>");
+				$.mobile.changePage("#article","slide",false,true);
+			}
+			
+			function addTheFeed()
+			{
+				var url = $("#rssFeed").val();			
+				if (url==""){
+					$.mobile.changePage("#main","slide",true,true);
+				}
+				else 
+				{				
+					var feeds = eval(localStorage["feeds"]);
+					feeds.push(url);
+					localStorage.setItem("feeds", JSON.stringify(feeds));
+					
+					window.location.reload();
+				}
+			}
+			
+			function deleteFeed(url)
+			{		
+				if (url==""){
+					$.mobile.changePage("#main","slide",true,true);
+				}
+				else 
+				{		
+					var feeds = eval(localStorage["feeds"]);
+					for (var i=0; i<feeds.length; i++)
+					{
+						if (feeds[i]==url) {
+							feeds.splice(i,1);
+							break;
+						}
+					}
+					localStorage.setItem("feeds", JSON.stringify(feeds));
+					
+					window.location.reload();
+				}
+			}
+			
+			function HtmlEncode(html) {
+			 return $('<div/>').text(html).html();
+			}
+			
+			function HtmlDecode(text) {
+			 return $('<div/>').html(text).text();
+			}
+			
+			//google feeds api
+			google.load("feeds", "1");
+			  	function OnLoad() {}
+			google.setOnLoadCallback(OnLoad);
+		-->
+		</script> 
+		</head>
+		<body>
+<div data-role="page" id="landing">
+
+	<div data-role="header" data-position="inline" data-theme="a">                               
+	</div>
+
+	<div data-role="content" class="content">
+	
+			<center><a href="#landing"><img src="images/tm.png" /></a><br/>
+		
+			<div data-role="navbar" style="width: 75%;">
+				<ul>
+					<li><a href="offerte" data-transition="slide"><img src="images/offerte.png" height="32px"/><br/>Offerte aanvragen</a></li>
+				</ul>
+			</div>
+			<div data-role="navbar" style="width: 75%;">
+			<ul>
+				<li><a href="#info" data-transition="slide"><img src="images/info.png" height="32px"/><br/>Info</a></li>
+				<li><a href="#portfolio" data-transition="slide"><img src="images/fotos.png" height="32px"/><br/>Portfolio</a></li>
+				<li><a href="#drukwerk" data-transition="slide"><img src="images/drukwerk.png" height="32px"/><br/>Drukwerk</a></li>
+				<li><a href="#reclame" data-transition="slide"><img src="images/reclame.png" height="32px"/><br/>Reclame</a></li>
+				<li><a href="#webdesign" data-transition="slide"><img src="images/webdesign.png" height="32px"/><br/>Webdesign</a></li>
+				<li><a href="#contact" data-transition="slide"><img src="images/contact.png" height="32px"/><br/>Contact</a></li>
+			</ul>
+		</div>
+		<div data-role="navbar" style="width: 75%;">
+			<ul>
+				<li><a href="#nieuws" data-transition="slide"><img src="images/nieuws.png" height="32px"/><br/>Nieuws</a></li>
+				<li><a href="http://www.facebook.com/tmreclame?sk=wall" data-transition="slide" target="_blank" ><img src="images/facebook.png" height="32px"/><br/>Facebook</a></li>
+				<li><a href="http://www.twitter.com/tmreclame" data-transition="slide" target="_blank" ><img src="images/twitter.png" height="32px"/><br/>Twitter</a></li>
+			</ul>
+		</div>
+		<br/>
+			   		</center>	   
+	</div>
+
+</div>
+
+<div data-role="page" id="info">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Informatie</h1>         
+		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+	</div>
+
+	<div data-role="content" class="content">
+		<p>Het imago van uw bedrijf is in goede handen bij TM Reclame. Voor creatieve ideeën, frisse ontwerpen, voldoende ervaring en kennis bent u bij ons aan het juiste adres. 
+<br/><br/>
+U kunt bij ons terecht voor alle zaken die met de uitstraling van uw organisatie te maken hebben. Voor elke uiting ontwerpen wij een passende originele oplossing, zowel in idee als in vorm. 
+Ook geven wij u persoonlijk advies en leveren professioneel maatwerk, en verdiepen wij ons graag in de communicatieboodschap die u wilt overbrengen
+<br/><br/>
+TM Reclame biedt u kennis, creativiteit en kwaliteit voor een scherpe prijs. 
+<br/><br/>
+Wat kan TM Reclame voor u betekenen? 
+<ul>
+<li>Webdesign</li>
+<li>Logo‘s</li>
+<li>Huisstijlen</li>
+<li>Flyers</li>
+<li>Posters</li>
+<li>Promotiemateriaal</li>
+<li>Advertenties</li>
+</ul>
+</p>
+	</div>
+</div>
+
+<div data-role="page" id="offerte">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Informatie</h1>         
+		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+	</div>
+
+	<div data-role="content" class="content">
+<h3>Offerte</h3>
+	</div>
+</div>
+
+<div data-role="page" id="webdesign">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Webdesign</h1>              
+	</div>
+
+	<div data-role="content" class="content">
+<h3>Offerte</h3>
+	</div>
+</div>
+
+<div data-role="page" id="portfolio">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Portfolio</h1>              
+	</div>
+
+	<div data-role="content" class="content">
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Projecten zoeken" data-filter-theme="b">
+				<li><a href="#andrepronk">Andre Pronk</a></li>
+				<li><a href="#aruvision">Aruvision</a></li>
+				<li><a href="#autohome">AutoHome</a></li>
+				<li><a href="#directioneast">Direction East</a></li>
+				<li><a href="#feestbeestje">Feestbeestje</a></li>
+				<li><a href="#fotolook">Fotolook</a></li>
+				<li><a href="#lindadeboed">Linda de Boed</a></li>
+				<li><a href="#mariclaud">Mariclaud</a></li>
+				<li><a href="#kruythof">Martijn Kruythof</a></li>
+				<li><a href="#dehaas">De Haas</a></li>
+				<li><a href="#oranjeschool">Oranjeschool</a></li>
+				<li><a href="#rianneshairfasion">Riannes hairfasion</a></li>
+				<li><a href="#rhodos">Restaurant rhodos</a></li>
+				<li><a href="#smartphonebatterijen">Smartphonebatterijen</a></li>
+				<li><a href="#stefit">Stefit</a></li>
+				<li><a href="#ssol">St-sol</a></li>
+				<li><a href="#egmond">van Egmond</a></li>
+				<li><a href="#voordeelbv">Voordeel BV</a></li>
+				<li><a href="#vvleiden">VV Leiden</a></li>
+			</ul>	
+		</div>
+</div>
+
+<div data-role="page" id="andrepronk">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Andre Pronk</h1>  
+		<a href="http://www.andrepronk.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a>            
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor fotolook hebben wij een complete community website gebouwd met vele extra's.</p>
+                <ul id="carousel">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/andre_pronk/andre_fotokaart_achterkant.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/andre_pronk/andre_fotokaart_voorkant.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/andre_pronk/poster_andrepronk.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/andre_pronk/website_andre.jpg" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="aruvision">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Aruvision</h1>  
+		<a href="http://www.aruvision.com" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a>            
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor aruvision hebben wij het logo ontworpen en de website gebouwd.</p>
+                <ul id="carousel1">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/aruvision/aruvision_logo.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="autohome">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Andre Pronk</h1>  
+		<a href="http://www.andrepronk.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a>            
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Auto Home hebben wij een advertentie ontworpen.</p>
+                <ul id="carousel2">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/autohome/6bb6dddec03f1c3a6c76b21dba9e1e554c63e892914de_auto_home.jpg" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="directioneast">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Direction East</h1>           
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Direction East hebben wij de huisstijl ontworpen.</p>
+                <ul id="carousel3">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/directioneast/45e283c07507cdaa1ec93f7dfdbfb3db4c63e8f44afcf_direction-east-visit.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/directioneast/directioneast_visit_a.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/directioneast/directioneast_briefpapier.jpg" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="feestbeestje">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Feestbeestje</h1>  
+		<a href="http://www.feestbeestje.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a>            
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor feestbeestje hebben we een website gebouwd en de visitekaartjes ontworpen.</p>
+                <ul id="carousel4">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/feestbeestje/feestbeestje_visit_achterkant.png" width="80%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/feestbeestje/feestbeestje_visit_voorkant.png" width="80%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/feestbeestje/website.png" width="80%"></li>                </ul>
+	</div>
+</div>
+<div data-role="page" id="fotolook">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Fotolook</h1>  
+		<a href="http://www.fotolook.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a>            
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor fotolook hebben we een complete community website gebouwd met vele extra's.</p>
+                <ul id="carousel5">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/fotolook/fotolook-logo.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/fotolook/fotolook-website.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="lindadeboed">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Fotolook</h1>         
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Linda de Boed hebben we de visitekaartjes ontworpen.</p>
+                <ul id="carousel6">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/lindadeboed/lind_drukproef-1.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/lindadeboed/lind_drukproef-2.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="mariclaud1">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Mariclaud</h1>         
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Mariclaud hebben we de visitekaartjes gedrukt.</p>
+                <ul id="carousel7">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/lindadeboed/lind_drukproef-1.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/lindadeboed/lind_drukproef-2.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="dehaas">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">De Haas</h1>         
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor de Haas bestrating hebben we de visitekaartjes en briefpapier ontworpen.</p>
+                <ul id="carousel8">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/matty/8240913da38c0e6dfb6752c14080eae14c8548aacc96a_matty_visit.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/matty/matty_briefpapier.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="oranjeschool">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">PC Oranjeschool</h1>         
+		<a href="http://www.pcoranjeschool.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a> 
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor de oranjeschool hebben we de nieuwsbrief, schoolgids, rapporten ontworpen en de website gebouwd.</p>
+                <ul id="carousel9">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/oranjeschool/Omslag_oranschool_schoolgids.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/oranjeschool/website_oranjeschool.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/oranjeschool/rapport_oranjeschool.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="kruythof">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Martyn Kruythof</h1>         
+		<a href="http://www.martynkruythof.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a> 
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Martyn Kruythof hebben we het logo ontworpen en de website gebouwd.</p>
+                <ul id="carousel10">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/kruythof/martyn_website.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/kruythof/martynkruythof_logo.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="rianneshairfasion">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Rianne's hairfasion</h1>         
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor Rianne's hairfasion hebben we de visitekaartjes ontworpen.</p>
+                <ul id="carousel11">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rianneshairfasion/rianneshairfasion_visit_a.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rianneshairfasion/rianneshairfasion_visit_v.jpg" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="rhodos">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Rhodos</h1>         
+		<a href="http://www.rhodosrestaurant.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a> 
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor restaurant Rhodos hebben we het logo, dinerchecks, flyers,advertenties en visitekaartjes ontworpen en de website gebouwd.</p>
+                <ul id="carousel12">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rhodos/3dfe69819a65786457133b9777fe1a2b4c63e68a9feb8_rhodos_dinercheck.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rhodos/7f09b1c0a0e62db868eec07542b189c04c63e68aa02a1_rhodos_flyer_algemeen.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rhodos/08d499cfecaf631340cc214882f43f7a4c63e68a9fae6_rhodos_advertentie_1.jpg" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/rhodos/7251d84cd3218433efec4e67a82947fa4c63e68a9f330_rhodos_website.jpg" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="smartphonebatterijen">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Rhodos</h1>         
+		<a href="http://www.smartphonebatterijen.nl" data-role="button" data-icon="forward" data-inline="true" target="_blank">Demo</a> 
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor smartphone batterijen hebben we flyers, visitekaartjes ontworpen en de website gebouwd.</p>
+                <ul id="carousel13">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/smartphonebatterijen/sb_visit-1.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/smartphonebatterijen/website_sb.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+<div data-role="page" id="stefit">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="back" data-rel="back" data-inline="true" data-transition="slideup">Portfolio</a>
+		<h1 class="">Rhodos</h1>         
+	</div>
+
+	<div data-role="content" class="content">
+	<p>Voor smartphone batterijen hebben we flyers, visitekaartjes ontworpen en de website gebouwd.</p>
+                <ul id="carousel13">
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/smartphonebatterijen/sb_visit-1.png" width="100%"></li>
+                    <li><img src="http://tmreclame.nl/images/stories/portfolio/smartphonebatterijen/website_sb.png" width="100%"></li>
+                </ul>
+	</div>
+</div>
+		<div data-role="page" id="nieuws" data-theme="b"> 
+			<div data-role="header"><h1>Laatste nieuws</h1></div> 
+			
+			<div data-role="content"> 
+				<div data-role="controlgroup" id="yourfeeds">
+				</div> 
+				
+				<div data-role="controlgroup"> 
+					<a href="#addfeed" data-role="button" data-iconpos="right" data-icon="plus">Feed toevoegen</a> 
+					<a href="#deletefeeds" data-role="button" data-iconpos="right" data-icon="delete">Feeds verwijderen</a> 
+					<a href="#" data-role="button" data-iconpos="right" data-icon="alert" onclick="restoreDefault()">Standaard feeds herstellen</a> 
+				</div> 	
+			</div> 
+		</div> 
+		
+		<!-- placeolder for feed template -->
+		<div id="results"> 
+			<div data-role="header"><h1 class="feedtitle">Feed</h1></div> 
+			
+			<div data-role="content" class="resultscontent">
+			</div> 
+			
+		</div>
+		<!-- placeolder for feed template -->
+		
+		<div data-role="page" id="deletefeeds" data-theme="b"> 
+			<div data-role="header"><h1>Feeds verwijderen</h1></div> 
+			
+			<div data-role="content"> 
+				<h5>Selecteer onderstaand een feed om te verwijderen.</h5>
+				<div data-role="controlgroup" id="deletefeedlist">
+				</div> 
+			</div> 
+		</div> 
+		
+		<div data-role="page" id="article" data-theme="b"> 
+			<div data-role="header"><h1>Details</h1></div> 
+			
+			<div data-role="content" class="articleinfo"></div> 
+			
+		</div> 
+		
+		<div data-role="page" id="addfeed" data-theme="b"> 
+			<div data-role="header"><h1>Feed toevoegen</h1></div> 
+			
+			<div data-role="content"> 
+				<div data-role="fieldcontain">
+					<label for="rssFeed">RSS Feed Url:</label>
+					<input type="text" id="rssFeed" name="rssFeed" value="http://" />
+				</div>
+				<input type="button" onclick="addTheFeed();" value="Add This Feed" data-iconpos="right" data-icon="check" />
+			</div> 
+			
+		</div> 
+<div data-role="page" id="drukwerk">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Drukwerk</h1>         
+		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+	</div>
+
+	<div data-role="content" class="content">
+<p><a href="#">TM relcame</a> verzorgt ook al uw drukwerk. Van tassen tot t-shirts, en van petjes tot sweaters, bij ons bent u aan het goede adres. 
+<br/><br/>
+Wij kunnen de volgende producten voor u bedrukken:
+<ul>
+<li>T-shirts</li>
+<li>Sweaters</li>
+<li>Sjawls</li>
+<li>Petten</li>
+<li>Muismatten</li>
+<li>Polo's</li>
+<li>Folders</li>
+<li>Flyers</li>
+<li>Kaarten</li>
+<li>Stickers</li>
+<li>Briefpapier</li>
+<li>Visitekaartjes</li>
+<li>Brochures</li>
+<li>En nog veel meer..</li>
+</ul>
+	</div>
+
+</div>
+
+<div data-role="page" id="reclame">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Reclame</h1>         
+		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+	</div>
+
+	<div data-role="content" class="content">
+<p><a href="#">TM relcame</a> verzorgt alle soorten en maten van ontwerpen, opgedeeld in verschillende activiteiten:
+
+<h3>Websites</h3>
+Wilt u een mooie en pakkende website laten maken of alleen laten ontwerpen, dan is dat mogelijk. Van een eenvoudige website tot een compleet CMS systeem, wij kunnen het maken. Uw website testen wij op verschillende browsers zoals Internet Explorer, Mozilla Firefox, Safari, Opera en Google Chrome.
+
+<h3>Posters</h3>
+Wilt u een mooie en pakkende poster laten ontwerpen voor een concert, uitje, feest of een groot evenement dat kan ook voor een lage prijs.
+
+<h3>Flyers</h3>
+Simpel, duidelijk en zeer aantrekkelijk, zo moet een flyer er uit zien en meer niet. Een flyer moet een eyecatcher zijn voor het gene wat u duidelijk wil maken voor de juiste doelgroep. Wij kunnen voor u een doeltreffende flyer maken!
+
+<h3>Promotiemateriaal</h3>
+Wij kunnen u voorzien van al uw promotiematerialen, het ontwerpen en het leveren ervan is geen probleem. Alles is mogelijk, van sleutelhangers tot verrekijkers en van balpennen tot paraplu's.
+
+<h3>Advertenties</h3>
+Wij ontwerpen voor u een banner voor het World wide web, of een advertentie in de krant. Het moet een doeltreffend communicatiemiddel zijn dat gelijk raak is. Wij ontwerpen de advertentie met uw informatie gewoon goed, snel en vooral betaalbaar.
+
+<h3>Reclameborden</h3>
+Reclame/gevel borden zijn een uitstekende reclame-uiting voor uw bedrijf, u bent hierdoor herkenbaar in de buurt en de klanten kunnen u makkelijk vinden. In overleg met u kunnen wij uw reclameborden en gevelreclame ontwerpen.
+
+<h3>Beletteren</h3>
+Uw bedrijfsauto is de perfecte manier om uw naam groot te maken in Nederland of zelfs daarbuiten. Samen kunnen wij uw bedrijfsauto in een ander jasje steken en proffessioneel te beletteren.
+	</div>
+
+</div>
+
+<div data-role="page" id="contact">
+
+	<div data-role="header" data-position="inline" data-theme="a"> 
+		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
+		<h1 class="">Contact</h1>         
+		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+	</div>
+
+	<div data-role="content" class="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<p>Contact</p>
+
+			<div data-role="fieldcontain">
+	         <label for="name">Text Input:</label>
+	         <input type="text" name="name" id="name" value=""  />
+			</div>
+
+			<div data-role="fieldcontain">
+			<label for="textarea">Textarea:</label>
+			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="slider2">Flip switch:</label>
+				<select name="slider2" id="slider2" data-role="slider">
+					<option value="off">Off</option>
+					<option value="on">On</option>
+				</select>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="slider">Slider:</label>
+			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			</div>
+
+			<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup">
+				<legend>Choose as many snacks as you'd like:</legend>
+				<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+				<label for="checkbox-1a">Cheetos</label>
+
+				<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+				<label for="checkbox-2a">Doritos</label>
+
+				<input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+				<label for="checkbox-3a">Fritos</label>
+
+				<input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+				<label for="checkbox-4a">Sun Chips</label>
+		    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+		    	<legend>Font styling:</legend>
+		    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
+				<label for="checkbox-6">b</label>
+
+				<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" />
+				<label for="checkbox-7"><em>i</em></label>
+
+				<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
+				<label for="checkbox-8">u</label>
+		    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup">
+			    	<legend>Choose a pet:</legend>
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+			         	<label for="radio-choice-1">Cat</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+			         	<label for="radio-choice-2">Dog</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-3" value="choice-3"  />
+			         	<label for="radio-choice-3">Hamster</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-4" value="choice-4"  />
+			         	<label for="radio-choice-4">Lizard</label>
+			    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal">
+			     	<legend>Layout view:</legend>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
+			         	<label for="radio-choice-c">List</label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-d" value="off" />
+			         	<label for="radio-choice-d">Grid</label>
+			         	<input type="radio" name="radio-choice-b" id="radio-choice-e" value="other" />
+			         	<label for="radio-choice-e">Gallery</label>
+			    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="select-choice-a" class="select">Choose shipping method:</label>
+				<select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+					<option>Custom menu example</option>
+					<option value="standard">Standard: 7 day</option>
+					<option value="rush">Rush: 3 days</option>
+					<option value="express">Express: next day</option>
+					<option value="overnight">Overnight</option>
+				</select>
+			</div>
+
+		<div class="ui-body ui-body-b">
+		<fieldset class="ui-grid-a">
+				<div class="ui-block-a"><button type="submit" data-theme="d">Cancel</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="a">Submit</button></div>
+	    </fieldset>
+		</div>
+	</form>
+	</div>
+
+</div>
+
+</body>
+
+</html>
