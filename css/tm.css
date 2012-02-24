@@ -36,7 +36,7 @@
 	color: #B1C903 /*{a-bar-color}*/;
 }
 .ui-bar-a .ui-link {
-	color:  #7cc4e7  /*{a-bar-link-color}*/;
+	color:  #B1C903  /*{a-bar-link-color}*/;
 	font-weight: bold;
 }
 
@@ -187,15 +187,15 @@
 }
 
 .ui-bar-b .ui-link:hover {
-	color:  #2489CE  /*{b-bar-link-hover}*/;
+	color:  #B1C903  /*{b-bar-link-hover}*/;
 }
 
 .ui-bar-b .ui-link:active {
-	color:  #2489CE  /*{b-bar-link-active}*/;
+	color:  #B1C903  /*{b-bar-link-active}*/;
 }
 
 .ui-bar-b .ui-link:visited {
-    color:  #2489CE  /*{b-bar-link-visited}*/;
+    color:  #B1C903  /*{b-bar-link-visited}*/;
 }
 
 .ui-bar-b,
@@ -330,15 +330,15 @@
 }
 
 .ui-bar-c .ui-link:hover {
-	color:  #2489CE  /*{c-bar-link-hover}*/;
+	color:  #B1C903  /*{c-bar-link-hover}*/;
 }
 
 .ui-bar-c .ui-link:active {
-	color:  #2489CE  /*{c-bar-link-active}*/;
+	color:  #B1C903  /*{c-bar-link-active}*/;
 }
 
 .ui-bar-c .ui-link:visited {
-    color:  #2489CE  /*{c-bar-link-visited}*/;
+    color:  #B1C903  /*{c-bar-link-visited}*/;
 }
 
 .ui-bar-c,
@@ -374,20 +374,20 @@
 }
 
 .ui-body-c .ui-link {
-	color:  #2489CE  /*{c-body-link-color}*/;
+	color:  #B1C903  /*{c-body-link-color}*/;
 	font-weight: bold;
 }
 
 .ui-body-c .ui-link:hover {
-	color:  #2489CE  /*{c-body-link-hover}*/;
+	color:  #B1C903  /*{c-body-link-hover}*/;
 }
 
 .ui-body-c .ui-link:active {
-	color:  #2489CE  /*{c-body-link-active}*/;
+	color:  #B1C903  /*{c-body-link-active}*/;
 }
 
 .ui-body-c .ui-link:visited {
-    color:  #2489CE  /*{c-body-link-visited}*/;
+    color:  #B1C903  /*{c-body-link-visited}*/;
 }
 
 .ui-btn-up-c {
@@ -473,15 +473,15 @@
 }
 
 .ui-bar-d .ui-link:hover {
-	color:  #2489CE  /*{d-bar-link-hover}*/;
+	color:  #B1C903  /*{d-bar-link-hover}*/;
 }
 
 .ui-bar-d .ui-link:active {
-	color:  #2489CE  /*{d-bar-link-active}*/;
+	color:  #B1C903  /*{d-bar-link-active}*/;
 }
 
 .ui-bar-d .ui-link:visited {
-    color:  #2489CE  /*{d-bar-link-visited}*/;
+    color:  #B1C903  /*{d-bar-link-visited}*/;
 }
 
 .ui-bar-d,
@@ -522,15 +522,15 @@
 }
 
 .ui-body-d .ui-link:hover {
-	color:  #2489CE  /*{d-body-link-hover}*/;
+	color:  #B1C903  /*{d-body-link-hover}*/;
 }
 
 .ui-body-d .ui-link:active {
-	color:  #2489CE  /*{d-body-link-active}*/;
+	color:  #B1C903  /*{d-body-link-active}*/;
 }
 
 .ui-body-d .ui-link:visited {
-    color:  #2489CE  /*{d-body-link-visited}*/;
+    color:  #B1C903  /*{d-body-link-visited}*/;
 }
 
 .ui-btn-up-d {

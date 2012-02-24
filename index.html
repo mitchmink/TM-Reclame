@@ -16,7 +16,6 @@
 		<link rel="stylesheet" href="css/carousel.css" />
 		<script src="js/jquery164min.js"></script> 
 		<script type="text/javascript" src="js/jquerymobile10a4min.js"></script>
-
         <script src="js/carousel.js"></script>
                 <script>
             $(document).ready(function() {
@@ -83,126 +82,6 @@
                 $('#carousel20').carousel({endless: true});
             });
         </script>
-        <script type="text/javascript" src="https://www.google.com/jsapi?key=ABQIAAAAuvAXPRXL9qkzO0R8vzYpOhQ_BAnb8hQeSCQ2aBH79hHa1YbW_RQNN9ClKXG21xQObiXJ7diAAYaywg"></script>
-		<script type="text/javascript">
-		<!--
-			//INIT
-			$(document).bind("mobileinit", function(){
-			  	$.extend(  $.mobile , {
-					defaultTransition: "slide"
-			  	}); 
-			  
-			  	//init local storage feeds
-			  	if ( typeof localStorage["feeds"] == "undefined")
-			  	{
-			    	restoreDefault();
-			  	}
-			});
-			
-			$(document).ready(function(){
-				//load local storage feeds
-				var feeds = eval(localStorage["feeds"]);
-			  	if (feeds!=null)
-				for (var i=0; i<feeds.length;i++)
-			  	{
-			  		//create buttons for rss feed
-			  		$("#yourfeeds").append('<input data-icon="arrow-r" data-iconpos="right" type="button" feed="'+localStorage.feeds[i]+'" onclick="loadFeed(\''+feeds[i]+'\');" value="'+feeds[i]+'" />');
-			  		$("#deletefeedlist").append('<input data-icon="delete" data-iconpos="right" type="button" feed="'+localStorage.feeds[i]+'" onclick="deleteFeed(\''+feeds[i]+'\');" value="'+feeds[i]+'" />');
-			  	}
-			});
-			
-			//FUNCS
-			function restoreDefault()
-			{
-				localStorage.clear();
-				var feeds= new Array();
-				feeds.push("http://www.tmreclame.nl/blog/rss");
-				
-				localStorage.setItem("feeds", JSON.stringify(feeds));
-				window.location.reload();
-			}
-			
-			function loadFeed(url)
-			{
-				var rnd=Math.floor(Math.random()*10000000);
-				$(document.body).append('<div data-role="page" id="results'+rnd+'" data-theme="b">'+$("#results").html()+'</div>');
-				
-				var feed = new google.feeds.Feed(url);
-				feed.setNumEntries(30);
-				feed.load(function(result) {
-					if (!result.error) 
-					{
-						$("#results"+rnd+" .resultscontent").append('<div data-role="controlgroup" class="articlelist"></div>');
-					  	for (var i = 0; i < result.feed.entries.length; i++) {
-							$("#results"+rnd+" .resultscontent .articlelist").append('<input data-icon="arrow-r" data-iconpos="right" onclick=\'showArticle("'+escape(result.feed.entries[i].title)+'","'+escape(result.feed.entries[i].link)+'","'+escape(result.feed.entries[i].content)+'")\' type="button" value="' + result.feed.entries[i].title.replace(/"/g, "'") + '" />');
-						}
-						$("#results"+rnd+" .feedtitle").html(url);
-						$.mobile.changePage($("#results"+rnd),"slide",false,true);
-					}
-					else
-						alert('feed error');
-				});
-			}
-			
-			function showArticle(title, url, desc)
-			{
-				if (typeof desc=="undefined")
-					desc="(No description provided)";
-				$("#article .articleinfo").html("<p>"+unescape(title)+"</p><p>"+unescape(desc)+"</p><p><a target=\"_blank\" href=\""+unescape(url)+"\">"+unescape(url)+"</a></p>");
-				$.mobile.changePage("#article","slide",false,true);
-			}
-			
-			function addTheFeed()
-			{
-				var url = $("#rssFeed").val();			
-				if (url==""){
-					$.mobile.changePage("#main","slide",true,true);
-				}
-				else 
-				{				
-					var feeds = eval(localStorage["feeds"]);
-					feeds.push(url);
-					localStorage.setItem("feeds", JSON.stringify(feeds));
-					
-					window.location.reload();
-				}
-			}
-			
-			function deleteFeed(url)
-			{		
-				if (url==""){
-					$.mobile.changePage("#main","slide",true,true);
-				}
-				else 
-				{		
-					var feeds = eval(localStorage["feeds"]);
-					for (var i=0; i<feeds.length; i++)
-					{
-						if (feeds[i]==url) {
-							feeds.splice(i,1);
-							break;
-						}
-					}
-					localStorage.setItem("feeds", JSON.stringify(feeds));
-					
-					window.location.reload();
-				}
-			}
-			
-			function HtmlEncode(html) {
-			 return $('<div/>').text(html).html();
-			}
-			
-			function HtmlDecode(text) {
-			 return $('<div/>').html(text).text();
-			}
-			
-			//google feeds api
-			google.load("feeds", "1");
-			  	function OnLoad() {}
-			google.setOnLoadCallback(OnLoad);
-		-->
-		</script> 
 		</head>
 		<body>
 <div data-role="page" id="landing">
@@ -231,7 +110,7 @@
 		</div>
 		<div data-role="navbar" style="width: 75%;">
 			<ul>
-				<li><a href="#nieuws" data-transition="slide"><img src="images/nieuws.png" height="32px"/><br/>Nieuws</a></li>
+				<li><a href="#list" data-transition="slide"><img src="images/nieuws.png" height="32px"/><br/>Nieuws</a></li>
 				<li><a href="http://www.facebook.com/tmreclame?sk=wall" data-transition="slide" target="_blank" ><img src="images/facebook.png" height="32px"/><br/>Facebook</a></li>
 				<li><a href="http://www.twitter.com/tmreclame" data-transition="slide" target="_blank" ><img src="images/twitter.png" height="32px"/><br/>Twitter</a></li>
 			</ul>
@@ -241,7 +120,7 @@
 	</div>
 
 </div>
-
+<script type="text/javascript" src="js/rss.js"></script>
 <div data-role="page" id="info">
 
 	<div data-role="header" data-position="inline" data-theme="a"> 
@@ -293,7 +172,7 @@ Wat kan TM Reclame voor u betekenen?
 	</div>
 
 	<div data-role="content" class="content">
-<h3>Offerte</h3>
+<iframe src="http://tmreclame.nl/" frameborder="0" width="99%" height="100%" align="middle"></iframe>
 	</div>
 </div>
 
@@ -567,60 +446,7 @@ Wat kan TM Reclame voor u betekenen?
                 </ul>
 	</div>
 </div>
-		<div data-role="page" id="nieuws" data-theme="b"> 
-			<div data-role="header"><h1>Laatste nieuws</h1></div> 
-			
-			<div data-role="content"> 
-				<div data-role="controlgroup" id="yourfeeds">
-				</div> 
-				
-				<div data-role="controlgroup"> 
-					<a href="#addfeed" data-role="button" data-iconpos="right" data-icon="plus">Feed toevoegen</a> 
-					<a href="#deletefeeds" data-role="button" data-iconpos="right" data-icon="delete">Feeds verwijderen</a> 
-					<a href="#" data-role="button" data-iconpos="right" data-icon="alert" onclick="restoreDefault()">Standaard feeds herstellen</a> 
-				</div> 	
-			</div> 
-		</div> 
-		
-		<!-- placeolder for feed template -->
-		<div id="results"> 
-			<div data-role="header"><h1 class="feedtitle">Feed</h1></div> 
-			
-			<div data-role="content" class="resultscontent">
-			</div> 
-			
-		</div>
-		<!-- placeolder for feed template -->
-		
-		<div data-role="page" id="deletefeeds" data-theme="b"> 
-			<div data-role="header"><h1>Feeds verwijderen</h1></div> 
-			
-			<div data-role="content"> 
-				<h5>Selecteer onderstaand een feed om te verwijderen.</h5>
-				<div data-role="controlgroup" id="deletefeedlist">
-				</div> 
-			</div> 
-		</div> 
-		
-		<div data-role="page" id="article" data-theme="b"> 
-			<div data-role="header"><h1>Details</h1></div> 
-			
-			<div data-role="content" class="articleinfo"></div> 
-			
-		</div> 
-		
-		<div data-role="page" id="addfeed" data-theme="b"> 
-			<div data-role="header"><h1>Feed toevoegen</h1></div> 
-			
-			<div data-role="content"> 
-				<div data-role="fieldcontain">
-					<label for="rssFeed">RSS Feed Url:</label>
-					<input type="text" id="rssFeed" name="rssFeed" value="http://" />
-				</div>
-				<input type="button" onclick="addTheFeed();" value="Add This Feed" data-iconpos="right" data-icon="check" />
-			</div> 
-			
-		</div> 
+
 <div data-role="page" id="drukwerk">
 
 	<div data-role="header" data-position="inline" data-theme="a"> 
@@ -657,33 +483,42 @@ Wij kunnen de volgende producten voor u bedrukken:
 
 	<div data-role="header" data-position="inline" data-theme="a"> 
 		<a href="index.html" data-role="button" data-icon="home" data-inline="true" data-transition="slideup">Home</a>
-		<h1 class="">Reclame</h1>         
-		<a href="#tm" data-role="button" data-icon="info" data-inline="true" data-transition="pop">Informatie</a>        
+		<h1 class="">Reclame</h1>             
 	</div>
 
 	<div data-role="content" class="content">
-<p><a href="#">TM relcame</a> verzorgt alle soorten en maten van ontwerpen, opgedeeld in verschillende activiteiten:
+<p><a href="#">TM relcame</a> verzorgt alle soorten en maten van ontwerpen, opgedeeld in verschillende activiteiten
 
-<h3>Websites</h3>
-Wilt u een mooie en pakkende website laten maken of alleen laten ontwerpen, dan is dat mogelijk. Van een eenvoudige website tot een compleet CMS systeem, wij kunnen het maken. Uw website testen wij op verschillende browsers zoals Internet Explorer, Mozilla Firefox, Safari, Opera en Google Chrome.
-
-<h3>Posters</h3>
-Wilt u een mooie en pakkende poster laten ontwerpen voor een concert, uitje, feest of een groot evenement dat kan ook voor een lage prijs.
-
-<h3>Flyers</h3>
-Simpel, duidelijk en zeer aantrekkelijk, zo moet een flyer er uit zien en meer niet. Een flyer moet een eyecatcher zijn voor het gene wat u duidelijk wil maken voor de juiste doelgroep. Wij kunnen voor u een doeltreffende flyer maken!
-
-<h3>Promotiemateriaal</h3>
-Wij kunnen u voorzien van al uw promotiematerialen, het ontwerpen en het leveren ervan is geen probleem. Alles is mogelijk, van sleutelhangers tot verrekijkers en van balpennen tot paraplu's.
-
-<h3>Advertenties</h3>
-Wij ontwerpen voor u een banner voor het World wide web, of een advertentie in de krant. Het moet een doeltreffend communicatiemiddel zijn dat gelijk raak is. Wij ontwerpen de advertentie met uw informatie gewoon goed, snel en vooral betaalbaar.
-
-<h3>Reclameborden</h3>
-Reclame/gevel borden zijn een uitstekende reclame-uiting voor uw bedrijf, u bent hierdoor herkenbaar in de buurt en de klanten kunnen u makkelijk vinden. In overleg met u kunnen wij uw reclameborden en gevelreclame ontwerpen.
-
-<h3>Beletteren</h3>
-Uw bedrijfsauto is de perfecte manier om uw naam groot te maken in Nederland of zelfs daarbuiten. Samen kunnen wij uw bedrijfsauto in een ander jasje steken en proffessioneel te beletteren.
+<div data-role="collapsible-set" data-icon="home">
+			<div data-role="collapsible" data-icon="home" data-collapsed="false">
+				<h3>Websites</h3>
+				<p>Wilt u een mooie en pakkende website laten maken of alleen laten ontwerpen, dan is dat mogelijk. Van een eenvoudige website tot een compleet CMS systeem, wij kunnen het maken. Uw website testen wij op verschillende browsers zoals Internet Explorer, Mozilla Firefox, Safari, Opera en Google Chrome.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Posters</h3>
+				<p>Wilt u een mooie en pakkende poster laten ontwerpen voor een concert, uitje, feest of een groot evenement dat kan ook voor een lage prijs.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Flyers</h3>
+				<p>Simpel, duidelijk en zeer aantrekkelijk, zo moet een flyer er uit zien en meer niet. Een flyer moet een eyecatcher zijn voor het gene wat u duidelijk wil maken voor de juiste doelgroep. Wij kunnen voor u een doeltreffende flyer maken!</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Promotiemateriaal</h3>
+				<p>Wij kunnen u voorzien van al uw promotiematerialen, het ontwerpen en het leveren ervan is geen probleem. Alles is mogelijk, van sleutelhangers tot verrekijkers en van balpennen tot paraplu's.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Advertenties</h3>
+				<p>Wij ontwerpen voor u een banner voor het World wide web, of een advertentie in de krant. Het moet een doeltreffend communicatiemiddel zijn dat gelijk raak is. Wij ontwerpen de advertentie met uw informatie gewoon goed, snel en vooral betaalbaar.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Reclameborden</h3>
+				<p>Reclame/gevel borden zijn een uitstekende reclame-uiting voor uw bedrijf, u bent hierdoor herkenbaar in de buurt en de klanten kunnen u makkelijk vinden. In overleg met u kunnen wij uw reclameborden en gevelreclame ontwerpen.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Beletteren</h3>
+				<p>Uw bedrijfsauto is de perfecte manier om uw naam groot te maken in Nederland of zelfs daarbuiten. Samen kunnen wij uw bedrijfsauto in een ander jasje steken en proffessioneel te beletteren.</p>
+			</div>
+		</div>
 	</div>
 
 </div>
@@ -699,7 +534,7 @@ Uw bedrijfsauto is de perfecte manier om uw naam groot te maken in Nederland of 
 	<div data-role="content" class="content">
 		<div class="content-primary">
 
-		<form action="#" method="get">
+		<form action="mailto:mitchmink_1@hotmail.com" method="post" enctype="text/html"">
 
 			<p>Contact</p>
 
